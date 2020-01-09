@@ -5,7 +5,6 @@ var renderer;
 //Définition de la durée d'une journée en Seconde
 var timeDay = 5;
 
-
 function Game() {
     renderer = new THREE.WebGLRenderer();
     document.body.appendChild(renderer.domElement);
@@ -111,14 +110,14 @@ function Game() {
 
 
 
-    //var LightPenguin = new THREE.AmbientLight(0x00ffff, 1);
-    //Terre.add(LightTerre);
+    var LightAmbiant = new THREE.AmbientLight(0xffffff, 100);
     
     Terre.add(Penguin);
-    Penguin.position.y = 10;
-    Penguin.rotation.x = Math.PI;
-    Penguin.scale.set(0.1,0.1,0.1);
-    //Penguin.add(LightPenguin);
+    Penguin.position.y = 5;
+    Penguin.rotation.z = Math.PI;
+    Penguin.scale.set(0.01,0.01,0.01);
+
+
 
     //Initialisation des ombres
     renderer.shadowMap.enabled = true;
@@ -127,6 +126,8 @@ function Game() {
     Terre.receiveShadow = true;
     Terre.castShadow = true;
     pointLight.castShadow = true;
+    Vaiseau.castShadow = true;
+    Vaiseau.receiveShadow = true;
 
     // positionnement de la caméra
     camera.position.z = 150;
@@ -135,22 +136,14 @@ function Game() {
 
 
     //Met à jours lorsque l'écrans change de taille
-    function updateViewportSize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix()
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.render(scene, camera);
-    }
-    window.addEventListener("resize", updateViewportSize);
 
 
-    //camera.lookAt(Vaiseau.position);
 
     //Permet le control à la souris
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.minDistance = 2;
     controls.maxDistance = 500;
-    controls.target = Vaiseau.position;
+    //controls.target = Vaiseau.position;
 
 
 
@@ -180,6 +173,15 @@ function Game() {
         renderer.render(scene, camera);
     }
     animate();
+
+
+    function updateViewportSize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix()
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.render(scene, camera);
+    }
+    window.addEventListener("resize", updateViewportSize);
 }
 
 //Permet de calculer la vitesse en fonction de la durée pour faire un tour complet en Jour

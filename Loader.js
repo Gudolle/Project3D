@@ -12,8 +12,8 @@ class Model {
 }
 
 var allModel = [
-    //Model 3D format obj avec sa texture MTL
-    new Model("UfoPlane", false),
+    //Model 3D format GLB
+    new Model("Vaiseau", false),
     new Model("Penguin", false),
 
 
@@ -31,11 +31,14 @@ var allPromises = [];
 var loader = new THREE.TextureLoader();
 var loader3d = new THREE.OBJLoader();
 var loaderMtl = new THREE.MTLLoader();
+var loaderGlb = new THREE.GLTFLoader();
 
 
 loaderMtl.setPath( 'MTL/' );
 loader3d.setPath( 'model/');
 loader.setPath( 'Texture/');
+loaderGlb.setPath( 'model/');
+
 
 
 var myBar = document.getElementById("myBar");
@@ -51,14 +54,14 @@ function ChargementModel(){
     allModel.forEach(function(item){
         allPromises.push(new Promise(function(resolve, error){
             if(!item.texture){
-                loaderMtl.load( item.name + '.mtl', function( materials ) {
-                    materials.preload();
-                    loader3d.setMaterials(materials);
-                    loader3d.load( item.name + '.obj', function ( object ) {
-                        item.AddModel(object);
-                        resolve(item);
-                    });
-                }, onsuccess , function(err) {console.log(err)});
+                loaderGlb.load(item.name + '.glb', function (gltf) {
+                    item.AddModel(gltf.scene);
+                    resolve(item);
+                  },
+                  onsuccess,
+                  function (error) {
+                    console.error(error);
+                });
             }
             else if(item.texture){
                 item.AddModel(loader.load( item.name + '.' + item.format, onsuccess));

@@ -21,7 +21,7 @@ function init(){
                 case "Penguin":
                     Penguin = item.Model;
                     break;
-                case "UfoPlane":
+                case "Vaiseau":
                     Vaiseau = item.Model;
                     break;
                 case "EarthCloud":
