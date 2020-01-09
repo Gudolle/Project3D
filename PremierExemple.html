@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>three.js app</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      .Control {
+          position: absolute;
+          float:left;
+          background-color:rgba(255,255,255,0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Control">
+        <table>
+            <tr>
+                <td>
+                    Position
+                </td>
+                <th>
+                    <input type="range" id="PosX" min="-5" max="0" step=".1" oninput="update();">
+                </th>
+                <th>
+                    <input type="range" id="PosZ" min="-5" max="0" step=".1" oninput="update();">
+                </th>
+                <th>
+                    <input type="range" id="PosY" min="-5" max="0" step=".1" oninput="update();">
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Rotation
+                </td>
+                <th>
+                    <input type="range" id="RotX" min="0" max="360" oninput="update();"/>
+                </th>
+                <th>
+                    <input type="range" id="RotZ" min="0" max="360" oninput="update();"/>
+                </th>
+                <th>
+                    <input type="range" id="RotY" min="0" max="360" oninput="update();"/>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Scale
+                </td>
+                <th>
+                    <input type="range" id="ScaX" min="0" max="5" step=".1" oninput="update();"/>
+                </th>
+                <th>
+                    <input type="range" id="ScaZ" min="0" max="5" step=".1" oninput="update();"/>
+                </th>
+                <th>
+                    <input type="range" id="ScaY" min="0" max="5" step=".1" oninput="update();"/>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <script src="three.min.js"></script>
+    <script>
+    var renderer = new THREE.WebGLRenderer();
+        document.body.appendChild(renderer.domElement);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 1000);
+
+        var scene = new THREE.Scene();
+
+        scene.background = new THREE.Color(0, 0, 1);
+
+        
+        var geometry = new THREE.BoxGeometry( 1, 1, 1,1,1,1 );
+        var material = new THREE.MeshBasicMaterial( {color: 0x000000} );
+        var cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+        cube.position.z = -3;
+        cube.rotation.x = 0;
+        cube.rotation.y = 0;
+        cube.add(new THREE.AxesHelper(1.3))
+
+        // positionnement de la caméra
+        camera.lookAt(cube.position); 
+
+        function updateViewportSize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix()
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.render(scene, camera); 
+        }
+        window.addEventListener("resize", updateViewportSize);
+        updateViewportSize();
+        
+        function update(){
+
+            cube.rotation.z = THREE.Math.degToRad(document.getElementById("RotZ").value);
+            cube.rotation.x = THREE.Math.degToRad(document.getElementById("RotX").value);
+            cube.rotation.y = THREE.Math.degToRad(document.getElementById("RotY").value);
+            cube.position.z = document.getElementById("PosZ").value;
+            cube.position.x = document.getElementById("PosX").value;
+            cube.position.y = document.getElementById("PosY").value;
+            cube.scale.z = document.getElementById("ScaZ").value;
+            cube.scale.x = document.getElementById("ScaX").value;
+            cube.scale.y = document.getElementById("ScaY").value;
+            //cube.scale(1,1,document.getElementById("ScaZ").value);
+            renderer.render(scene, camera); 
+        }
+        
+
+
+        function animate(){
+            cube.rotateX(THREE.Math.degToRad(1));
+            cube.rotateZ(THREE.Math.degToRad(1));
+            cube.rotateY(THREE.Math.degToRad(1));
+            
+            camera.rotateZ(THREE.Math.degToRad(1));
+
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+        </script>
+    
+  </body>
+</html>
