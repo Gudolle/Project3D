@@ -4,20 +4,23 @@ var LuneTexture;
 var SoleilTexture;
 var nuageTexture;
 
-
+var Penguin;
 var Vaiseau;
 
 //Lancement de l'initialisation
 init();
 
 function init(){
-
-
     ChargementModel();
 
+    
     Promise.all(allPromises).then(function(retour){
+        
         retour.forEach(function(item){
             switch(item.name){
+                case "Penguin":
+                    Penguin = item.Model;
+                    break;
                 case "UfoPlane":
                     Vaiseau = item.Model;
                     break;

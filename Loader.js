@@ -12,7 +12,14 @@ class Model {
 }
 
 var allModel = [
+    //Model 3D format obj avec sa texture MTL
     new Model("UfoPlane", false),
+    new Model("Penguin", false),
+
+
+
+
+    //Texture
     new Model("EarthCloud", true, "jpg"),
     new Model("EarthNormal", true, "jpg"),
     new Model("LuneTexture", true, "jpg"),
@@ -32,16 +39,12 @@ loader.setPath( 'Texture/');
 
 
 var myBar = document.getElementById("myBar");
-var width = 1;
+var width = 0;
 var padding = 100/allModel.length;
-console.log(padding);
-console.log(elem);
 
 var onsuccess = function(){
     width += padding;
-    if(width >= 100){
-        myBar.style.width = width + "%"; 
-    }
+    myBar.style.width = width + "%";
 }
 
 function ChargementModel(){
@@ -55,7 +58,7 @@ function ChargementModel(){
                         item.AddModel(object);
                         resolve(item);
                     });
-                }, onsuccess);
+                }, onsuccess , function(err) {console.log(err)});
             }
             else if(item.texture){
                 item.AddModel(loader.load( item.name + '.' + item.format, onsuccess));
