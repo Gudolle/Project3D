@@ -6,6 +6,10 @@ var nuageTexture;
 
 var Penguin;
 var Vaiseau;
+var clock;
+
+
+var MyGame;
 
 //Lancement de l'initialisation
 init();
@@ -13,7 +17,8 @@ init();
 function init(){
     ChargementModel();
 
-    
+    MyGame = new GameInfo();
+    clock = new THREE.Clock();
     Promise.all(allPromises).then(function(retour){
         
         retour.forEach(function(item){
