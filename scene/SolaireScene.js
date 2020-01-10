@@ -90,6 +90,14 @@ class SolaireScene {
         this.empty.position.x = .75;
         this.empty.position.y = .75;
         this.Terre.add(this.empty);
+        this.Soleil.add(this.empty);
+        //this.Mercure.add(this.empty);
+        //this.Venus.add(this.empty);
+        //this.Mars.add(this.empty);
+        //this.Jupiter.add(this.empty);
+        //this.Saturne.add(this.empty);
+        //this.Uranus.add(this.empty);
+        //this.Neptude.add(this.empty);
 
         // recup position
         this.getPositionOnScreen = function(camera, object3d) {
@@ -168,6 +176,51 @@ class SolaireScene {
         var pos = this.getPositionOnScreen(this.camera, this.empty);
         terrePopup.style.left = pos.x + "px";
         terrePopup.style.top = pos.y + "px";
+
+        /*//affichage soleilPopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        soleilPopup.style.left = pos.x + "px";
+        soleilPopup.style.top = pos.y + "px";
+
+        //affichage mercurePopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        mercurePopup.style.left = pos.x + "px";
+        mercurePopup.style.top = pos.y + "px";
+
+        //affichage venusPopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        venusPopup.style.left = pos.x + "px";
+        venusPopup.style.top = pos.y + "px";
+
+        //affichage marsPopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        marsPopup.style.left = pos.x + "px";
+        marsPopup.style.top = pos.y + "px";
+
+        //affichage jupiterPopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        jupiterPopup.style.left = pos.x + "px";
+        jupiterPopup.style.top = pos.y + "px";
+
+        //affichage jupiterPopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        jupiterPopup.style.left = pos.x + "px";
+        jupiterPopup.style.top = pos.y + "px";
+
+        //affichage saturnePopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        saturnePopup.style.left = pos.x + "px";
+        saturnePopup.style.top = pos.y + "px";
+
+        //affichage uranusPopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        uranusPopup.style.left = pos.x + "px";
+        uranusPopup.style.top = pos.y + "px";
+
+        //affichage neptunePopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        neptunePopup.style.left = pos.x + "px";
+        neptunePopup.style.top = pos.y + "px";*/
 
         if(this.actif)
             requestAnimationFrame(this.animate.bind(this));
