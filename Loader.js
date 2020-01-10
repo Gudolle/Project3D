@@ -29,17 +29,10 @@ var allModel = [
 var allPromises = [];
 
 var loader = new THREE.TextureLoader();
-var loader3d = new THREE.OBJLoader();
-var loaderMtl = new THREE.MTLLoader();
 var loaderGlb = new THREE.GLTFLoader();
 
-
-loaderMtl.setPath( 'MTL/' );
-loader3d.setPath( 'model/');
 loader.setPath( 'Texture/');
 loaderGlb.setPath( 'model/');
-
-
 
 var myBar = document.getElementById("myBar");
 var width = 0;
