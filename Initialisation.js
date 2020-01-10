@@ -3,6 +3,8 @@ var TerreNormale;
 var LuneTexture;
 var SoleilTexture;
 var nuageTexture;
+var solTexture;
+var WaterTexture;
 
 var Penguin;
 var Vaiseau;
@@ -43,6 +45,12 @@ function init(){
                     break;
                 case "LuneTexture":
                     LuneTexture = item.Model;
+                    break;
+                case "solTexture":
+                    solTexture = item.Model;
+                    break;
+                case "waternormals":
+                    WaterTexture = item.Model;
                     break;
             }
         });

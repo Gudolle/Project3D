@@ -24,7 +24,9 @@ var allModel = [
     new Model("EarthNormal", true, "jpg"),
     new Model("LuneTexture", true, "jpg"),
     new Model("SoleilTexture", true, "jpg"),
-    new Model("TerreTexture", true, "jpg")
+    new Model("TerreTexture", true, "jpg"),
+    new Model("solTexture", true, "jpg"),
+    new Model("waternormals", true, "jpg")
 ];
 var allPromises = [];
 
