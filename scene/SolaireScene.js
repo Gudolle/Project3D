@@ -120,10 +120,6 @@ class SolaireScene {
 
 
         
-        this.Terre.add(Penguin);
-        Penguin.position.y = 5;
-        Penguin.rotation.z = Math.PI;
-        Penguin.scale.set(0.01, 0.01, 0.01);
 
 
 

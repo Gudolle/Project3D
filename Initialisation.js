@@ -3,12 +3,16 @@ var TerreNormale;
 var LuneTexture;
 var SoleilTexture;
 var nuageTexture;
-var solTexture;
 var WaterTexture;
 
 var Penguin;
 var Vaiseau;
+var Terrains;
+var grass;
+
+
 var clock;
+
 
 
 var MyGame;
@@ -27,6 +31,7 @@ function init(){
             switch(item.name){
                 case "Penguin":
                     Penguin = item.Model;
+                    Penguin.rotation.x = -.5 * Math.PI;
                     break;
                 case "Vaiseau":
                     Vaiseau = item.Model;
@@ -46,12 +51,17 @@ function init(){
                 case "LuneTexture":
                     LuneTexture = item.Model;
                     break;
-                case "solTexture":
-                    solTexture = item.Model;
-                    break;
                 case "waternormals":
                     WaterTexture = item.Model;
                     break;
+                case "terrain":
+                    Terrains = item.Model;
+                    break;
+                case "grass1":
+                    grass = item.Model;
+                    break;
+
+
             }
         });
         Game();

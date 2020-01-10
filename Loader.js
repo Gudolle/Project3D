@@ -16,6 +16,7 @@ var allModel = [
     //Model 3D format GLB
     new Model("Vaiseau", false),
     new Model("Penguin", false),
+    new Model("terrain", false),
 
 
 
@@ -27,7 +28,7 @@ var allModel = [
     new Model("SoleilTexture", true, "jpg"),
     new Model("TerreTexture", true, "jpg"),
     new Model("waternormals", true, "jpg"),
-    new Model("solTexture", true, "jpg")
+    new Model("grass1", true, "jpg")
 ];
 
 
@@ -62,7 +63,7 @@ function ChargementModel(){
                 });
             }
             else if(item.texture){
-                item.AddModel(loader.load( item.name + '.' + item.format, onsuccess));
+                item.AddModel(loader.load( item.name + '.' + item.format, undefined, onsuccess , function(err) { console.log("Erreur pour : " + item.name)}));
                 resolve(item);
             }
         }));
