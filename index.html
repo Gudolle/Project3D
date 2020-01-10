@@ -21,9 +21,19 @@
       .Barre{
         margin:20px;
       }
+      #terrePopup {
+        position: absolute;
+        z-index: 10;
+        max-width: 20em;
+        background-color: white;
+        padding: 10px;
+      }
     </style>
   </head>
   <body>
+    <div id="terrePopup">
+      bonjour je suis la terre
+    </div>
     <div class="Barre" id="Barre">
       <div id="myProgress">
         <div id="myBar"></div>
@@ -33,6 +43,7 @@
     </div>
     <script src="js/three.min.js"></script>
     <script src="js/OrbitControls.js"></script>
+    <script src="js/THREE.GamepadControls.js"></script>
     
     <script src="js/GLTFLoader.js"></script>
     <script src="Loader.js"></script>

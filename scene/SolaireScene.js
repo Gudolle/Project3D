@@ -85,6 +85,24 @@ class SolaireScene {
 
         this.Lune.scale.set(2.723, 2.723, 2.723);
 
+        // ajouter un objet vide pour porter la div
+        this.empty = new THREE.Object3D();
+        this.empty.position.x = .75;
+        this.empty.position.y = .75;
+        this.Terre.add(this.empty);
+
+        // recup position
+        this.getPositionOnScreen = function(camera, object3d) {
+            var vector = new THREE.Vector3();
+            object3d.getWorldPosition(vector).project(camera);
+            // On passe des coordonnées dans le repère normalisé (NDC) aux
+            // coordonnées de l'écran
+            vector.x = Math.round((vector.x + 1) / 2 * window.innerWidth);
+            vector.y = Math.round(-(vector.y - 1) / 2 * window.innerHeight);
+  
+            return vector;
+          }
+
         //Définition de la lumière du soleil
         var pointLight = new THREE.PointLight(0xaaaaff, 10, 2000);
         pointLight.position.set(0, 0, 0);
@@ -128,9 +146,12 @@ class SolaireScene {
 
 
         //Permet le control à la souris
-        var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
+        /*var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.minDistance = 2;
-        controls.maxDistance = 500;
+        controls.maxDistance = 500;*/
+
+        //Permet le control à la manette
+        var manetteControls = new THREE.GamepadControls(this.camera);
 
         this.IsDefine = true;
 
@@ -146,6 +167,11 @@ class SolaireScene {
         this.GroupTerreSoleil.rotateY(ToRad(delta * speedTerreAns));
         this.Soleil.rotateY(ToRad(delta * speedRotationSoleil));
         this.nuage.rotateZ(ToRad(delta * speedNuage));
+
+        //affichage terrePopup
+        var pos = this.getPositionOnScreen(this.camera, this.empty);
+        terrePopup.style.left = pos.x + "px";
+        terrePopup.style.top = pos.y + "px";
 
         if(this.actif)
             requestAnimationFrame(this.animate.bind(this));
