@@ -11,6 +11,7 @@ class Model {
     }
 }
 
+
 var allModel = [
     //Model 3D format GLB
     new Model("Vaiseau", false),
@@ -25,9 +26,11 @@ var allModel = [
     new Model("LuneTexture", true, "jpg"),
     new Model("SoleilTexture", true, "jpg"),
     new Model("TerreTexture", true, "jpg"),
-    new Model("solTexture", true, "jpg"),
-    new Model("waternormals", true, "jpg")
+    new Model("waternormals", true, "jpg"),
+    new Model("solTexture", true, "jpg")
 ];
+
+
 var allPromises = [];
 
 var loader = new THREE.TextureLoader();

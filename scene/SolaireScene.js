@@ -146,12 +146,12 @@ class SolaireScene {
 
 
         //Permet le control à la souris
-        /*var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
+        var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.minDistance = 2;
-        controls.maxDistance = 500;*/
+        controls.maxDistance = 500;
 
         //Permet le control à la manette
-        var manetteControls = new THREE.GamepadControls(this.camera);
+        //var manetteControls = new THREE.GamepadControls(this.camera);
 
         this.IsDefine = true;
 
