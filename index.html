@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 
 <head>
   <meta charset=utf-8>
@@ -24,10 +25,21 @@
     .Barre {
       margin: 20px;
     }
+    
+    #terrePopup {
+        position: absolute;
+        z-index: 10;
+        max-width: 20em;
+        background-color: white;
+        padding: 10px;
+      }
   </style>
 </head>
 
 <body>
+  <div id="terrePopup">
+    bonjour je suis la terre
+  </div>
   <div class="Barre" id="Barre">
     <div id="myProgress">
       <div id="myBar"></div>
@@ -60,4 +72,68 @@
 
 </body>
 
+=======
+  <head>
+    <meta charset=utf-8>
+    <title>Systeme Solaire</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #myProgress {
+        width: 100%;
+        background-color: grey;
+      }
+
+      #myBar {
+        width: 1%;
+        height: 30px;
+        background-color: green;
+      }
+      .Barre{
+        margin:20px;
+      }
+      #terrePopup {
+        position: absolute;
+        z-index: 10;
+        max-width: 20em;
+        background-color: white;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="terrePopup">
+      bonjour je suis la terre
+    </div>
+    <div class="Barre" id="Barre">
+      <div id="myProgress">
+        <div id="myBar"></div>
+      </div>
+      <br/>
+      <h1 style="text-align: center;">Chargement des models...</h1>
+    </div>
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/THREE.GamepadControls.js"></script>
+    
+    <script src="js/GLTFLoader.js"></script>
+    <script src="Loader.js"></script>
+
+    
+    <!--Scene définie-->
+    <script src="scene/SolaireScene.js"></script>
+    <script src="scene/TerreScene.js"></script>
+
+    <!--Class Importante-->
+    <script src="class/Game.js"></script>
+    
+
+    <script src="Game.js"></script>
+    <script src="Initialisation.js"></script>
+
+    
+  </body>
+>>>>>>> eb0bdacd4c9555267da10a8a0becb555ad175578
 </html>

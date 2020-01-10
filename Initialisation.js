@@ -12,6 +12,21 @@ var clock;
 
 
 var MyGame;
+var allModel = [
+    //Model 3D format GLB
+    new Model("Vaiseau", false),
+    new Model("Penguin", false),
+
+
+
+
+    //Texture
+    new Model("EarthCloud", true, "jpg"),
+    new Model("EarthNormal", true, "jpg"),
+    new Model("LuneTexture", true, "jpg"),
+    new Model("SoleilTexture", true, "jpg"),
+    new Model("TerreTexture", true, "jpg")
+];
 
 //Lancement de l'initialisation
 init();
