@@ -33,23 +33,31 @@ class TerreScene {
         //Terrains.traverse ( (o) => { console.log(o)})
         this.scene.add(Terrains);
 
+        Terrains.scale.set(.5,.5,.5);
+
+
         this.water = new BestWater(this.scene, this.camera, directionalLight);
         // positionnement de la caméra
-        this.camera.position.y = 500;
-        this.camera.position.x = 40;
 
         
-        var FirstPingouin = new Pingouin(0, -30, 0);
-
-
-        this.scene.add(FirstPingouin.getModel());
+        this.PingouinJoueur = new Pingouin(0, 30, 0);
+        this.scene.add(this.PingouinJoueur.getModel());
         //Penguin.scale.set(0.01, 0.01, 0.01);
 
- 
+        var manetteControls = new THREE.GamepadControls(this.PingouinJoueur.getModel());
+        this.PingouinJoueur.getModel().add(this.camera);
+        //this.PingouinJoueur.getModel().add(new THREE.AxesHelper(1000))
+        
+        this.camera.position.y = 100;
+        this.camera.position.z = 150;
+        //this.camera.rotateX(.5 *Math.PI);
+        this.camera.lookAt(this.PingouinJoueur.getCamera());
 
+        /*
         var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.minDistance = 2;
         controls.maxDistance = 1200;
+        */
 
         this.IsDefine = true;
     }
@@ -57,6 +65,7 @@ class TerreScene {
         var delta = clock.getDelta();
 
         this.water.update();
+        //this.PingouinJoueur.animate(delta);
 
         if (this.actif)
             requestAnimationFrame(this.animate.bind(this));

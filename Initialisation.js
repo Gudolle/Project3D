@@ -32,6 +32,7 @@ function init(){
                 case "Penguin":
                     Penguin = item.Model;
                     Penguin.rotation.x = -.5 * Math.PI;
+                    Penguin.scale.set(.1,.1,.1)
                     break;
                 case "Vaiseau":
                     Vaiseau = item.Model;

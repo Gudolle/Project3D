@@ -2,7 +2,7 @@ class SolaireScene {
     constructor() {
         this.scene = new THREE.Scene();
         this.actif = true;
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 4000);
         this.name = "Solaire";
         this.IsDefine = false;
     }
@@ -142,11 +142,10 @@ class SolaireScene {
         Vaiseau.receiveShadow = true;
 
         // positionnement de la caméra
+        /*
         this.camera.position.z = 150;
         this.camera.position.y = 20;
         this.camera.position.x = -70;
-
-
 
 
         //Permet le control à la souris
@@ -154,8 +153,16 @@ class SolaireScene {
         controls.minDistance = 2;
         controls.maxDistance = 500;
 
+        */
         //Permet le control à la manette
-        //var manetteControls = new THREE.GamepadControls(this.camera);
+        var manetteControls = new THREE.GamepadControls(Vaiseau);
+        Vaiseau.add(this.camera);
+        
+        this.camera.position.y = 40;
+        this.camera.position.z = -120;
+        this.camera.rotateY(Math.PI);
+
+
 
         this.IsDefine = true;
 
