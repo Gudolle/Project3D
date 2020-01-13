@@ -42,24 +42,6 @@ class SolaireScene {
         this.SystemeSolaire.add(this.Soleil);
         this.Soleil.scale.set(50, 50, 50);
 
-
-        //Initialisation du Group "Terre" comprennant la Terre et sa Lune
-        /*this.GroupTerre = new THREE.Group();
-        this.GroupTerreSoleil.add(this.GroupTerre);
-        this.GroupTerre.position.z = 0;
-        this.GroupTerre.position.x = 150;*/
-
-
-
-        //Création de la Terre
-        /*var material = new THREE.MeshStandardMaterial({
-            map: TerreTexture,
-            normalMap: TerreNormale
-        });
-        this.Terre = new THREE.Mesh(sphere, material);
-        this.GroupTerre.add(this.Terre);
-        this.Terre.scale.set(10, 10, 10);*/
-
         //Création planètes
         this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns);
         this.Terre.group.position.z = 0;
@@ -78,9 +60,9 @@ class SolaireScene {
         this.Terre.mesh.add(this.nuage);
         this.nuage.scale.set(1.1, 1.1, 1.1);
 
-
         this.GroupLune = new THREE.Group();
         this.Terre.group.add(this.GroupLune);
+
         //Création de la lune
         var LuneMaterial = new THREE.MeshStandardMaterial({ map: LuneTexture });
         this.Lune = new THREE.Mesh(sphere, LuneMaterial);
@@ -111,12 +93,6 @@ class SolaireScene {
         var LightLune = new THREE.AmbientLight(0xdddddd, 0.3);
         this.Lune.add(LightLune);
 
-
-
-        
-
-
-
         //Initialisation des ombres
         renderer.shadowMap.enabled = true;
         this.Lune.receiveShadow = true;
@@ -130,7 +106,6 @@ class SolaireScene {
         this.camera.position.y = 40;
         this.camera.position.z = -120;
         this.camera.rotateY(Math.PI);
-
 
         //Permet le control à la souris
         var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
@@ -161,8 +136,6 @@ class SolaireScene {
         }
 
         this.IsDefine = true;
-
-        
     }
 
     animate() {
@@ -179,8 +152,6 @@ class SolaireScene {
 
         if(this.actif)
 
-
-
             requestAnimationFrame(this.animate.bind(this));
 
         renderer.render(this.scene, this.camera);
@@ -192,11 +163,10 @@ class SolaireScene {
         this.actif = true;
     }
     
-
 }
 
-var speedMars = CalculTempo(.5);
-var speedMarsAns = CalculTempo(15);
+var speedMars = CalculTempo(.5);//TODO a checker
+var speedMarsAns = CalculTempo(15);// TODO ^
 var speedLune = CalculTempo(28); //La lune met 28 jours pour tourner autour de la terre
 var speedTerre = CalculTempo(1); // La terre met 1 jours pour tourner autour d'elle même
 var speedTerreAns = CalculTempo(365); //La terre met 365 jour pour tourner autour du soleil
