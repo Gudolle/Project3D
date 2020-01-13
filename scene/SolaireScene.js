@@ -42,7 +42,6 @@ class SolaireScene {
         this.SystemeSolaire.add(this.Soleil);
         this.Soleil.scale.set(50, 50, 50);
 
-
         this.GroupTerreSoleil = new THREE.Group();
         this.SystemeSolaire.add(this.GroupTerreSoleil);
 
@@ -64,8 +63,13 @@ class SolaireScene {
         this.GroupTerre.add(this.Terre);
         this.Terre.scale.set(10, 10, 10);
 
+        //Création planètes
+        this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "test", 7, speedMars, speedMarsAns);
+        this.Mars.group.position.z = 0;
+        this.Mars.group.position.x = -150;
 
-
+        //Ajout dans le système solaire
+        this.SystemeSolaire.add(this.Mars.baryGroup);
 
 
         //Ajout des nuages à la terre
@@ -91,7 +95,7 @@ class SolaireScene {
         this.empty.position.y = .75;
         this.Terre.add(this.empty);
 
-        // recup position
+        //Méthode pour recupérer la position d'un objet
         this.getPositionOnScreen = function(camera, object3d) {
             var vector = new THREE.Vector3();
             object3d.getWorldPosition(vector).project(camera);
@@ -101,7 +105,7 @@ class SolaireScene {
             vector.y = Math.round(-(vector.y - 1) / 2 * window.innerHeight);
   
             return vector;
-          }
+        }
 
         //Définition de la lumière du soleil
         var pointLight = new THREE.PointLight(0xaaaaff, 10, 2000);
@@ -150,8 +154,28 @@ class SolaireScene {
         controls.minDistance = 2;
         controls.maxDistance = 500;
 
-        //Permet le control à la manette
-        //var manetteControls = new THREE.GamepadControls(this.camera);
+        //Permet de swap entre souris et manette
+        var manetteControls;
+        var gamepadSupportAvailable = navigator.getGamepads ||
+		!!navigator.webkitGetGamepads ||
+        !!navigator.webkitGamepads;
+        function swapControl(camera, toMouse) {
+            if (toMouse) {
+                manetteControls = null;
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.minDistance = 2;
+                controls.maxDistance = 500;
+            } else {
+                controls = null;
+                manetteControls = new THREE.GamepadControls(camera);
+            }
+        }
+        if (!gamepadSupportAvailable) {
+            console.log( 'NOT SUPPORTED' );
+        } else {
+            window.addEventListener('gamepadconnected', swapControl(this.camera, true));
+            window.addEventListener('gamepaddisconnected', swapControl(this.camera, false));
+        }
 
         this.IsDefine = true;
 
@@ -173,7 +197,13 @@ class SolaireScene {
         terrePopup.style.left = pos.x + "px";
         terrePopup.style.top = pos.y + "px";
 
+        //Annimate planètes
+        this.Mars.Animate(this.camera);
+
         if(this.actif)
+
+
+
             requestAnimationFrame(this.animate.bind(this));
 
         renderer.render(this.scene, this.camera);
@@ -188,6 +218,8 @@ class SolaireScene {
 
 }
 
+var speedMars = CalculTempo(.5);
+var speedMarsAns = CalculTempo(15);
 var speedLune = CalculTempo(28); //La lune met 28 jours pour tourner autour de la terre
 var speedTerre = CalculTempo(1); // La terre met 1 jours pour tourner autour d'elle même
 var speedTerreAns = CalculTempo(365); //La terre met 365 jour pour tourner autour du soleil

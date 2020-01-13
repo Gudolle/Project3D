@@ -19,6 +19,7 @@ THREE.GamepadControls = function ( object ) {
 			console.log( 'NOT SUPPORTED' );
 		} else {
 			if ('ongamepadconnected' in window) {
+				console.log('yo');
 				window.addEventListener('gamepadconnected', onGamepadConnect.bind( this ), false);
 				window.addEventListener('gamepaddisconnected', gamepadSupport.onGamepadDisconnect.bind( this ), false);
 			} else {
