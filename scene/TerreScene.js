@@ -19,52 +19,45 @@ class TerreScene {
                 'bluecloud_lf.jpg'
             ]);;
 
-        var xS = 63, yS = 63;
-        var terrainScene = THREE.Terrain({
-            easing: THREE.Terrain.Linear,
-            frequency: 2.5,
-            heightmap: THREE.Terrain.DiamondSquare,
-            material: new THREE.MeshBasicMaterial({
-                map: solTexture
-            }),
-            maxHeight: 1000,
-            minHeight: -1000,
-            steps: 1,
-            useBufferGeometry: false,
-            xSegments: xS,
-            xSize: 4096,
-            ySegments: yS,
-            ySize: 4096,
-        });
-        this.scene.add(terrainScene);
+		// Add light
+		var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+		//directionalLight.position.set(400, 300, 400);
+        this.scene.add(directionalLight);
 
-/*
-        // Optional:
-        // Get the geometry of the terrain across which you want to scatter meshes
-        var geo = terrainScene.children[0].geometry;
-        // Add randomly distributed foliage
-        var decoScene = THREE.Terrain.ScatterMeshes(geo, {
-            mesh: new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 12, 6)),
-            w: xS,
-            h: yS,
-            spread: 0.02,
-            randomness: Math.random,
-        });
-        terrainScene.add(decoScene);
-*/
 
-        this.water = new BestWater(this.scene);
+        var TextureTerrains = new THREE.MeshStandardMaterial({ map: grass });
+        //var newMaterial = new THREE.MeshStandardMaterial({color: 0xff0000});
+        Terrains.traverse ( ( o ) => {
+            if ( o.isMesh ) if (o.isMesh) o.material = TextureTerrains
+        });
+        //Terrains.traverse ( (o) => { console.log(o)})
+        this.scene.add(Terrains);
+
+        Terrains.scale.set(.5,.5,.5);
+
+
+        this.water = new BestWater(this.scene, this.camera, directionalLight);
         // positionnement de la caméra
-        this.camera.position.y = 500;
-        this.camera.position.x = 40;
 
+        
+        this.PingouinJoueur = new Pingouin(0, 30, 0);
+        this.scene.add(this.PingouinJoueur.getModel());
+        //Penguin.scale.set(0.01, 0.01, 0.01);
 
+        var manetteControls = new THREE.GamepadControls(this.PingouinJoueur.getModel());
+        this.PingouinJoueur.getModel().add(this.camera);
+        //this.PingouinJoueur.getModel().add(new THREE.AxesHelper(1000))
+        
+        this.camera.position.y = 100;
+        this.camera.position.z = 150;
+        //this.camera.rotateX(.5 *Math.PI);
+        this.camera.lookAt(this.PingouinJoueur.getCamera());
 
- 
-
+        /*
         var controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.minDistance = 2;
         controls.maxDistance = 1200;
+        */
 
         this.IsDefine = true;
     }
@@ -72,6 +65,7 @@ class TerreScene {
         var delta = clock.getDelta();
 
         this.water.update();
+        //this.PingouinJoueur.animate(delta);
 
         if (this.actif)
             requestAnimationFrame(this.animate.bind(this));

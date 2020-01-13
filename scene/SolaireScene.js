@@ -2,7 +2,7 @@ class SolaireScene {
     constructor() {
         this.scene = new THREE.Scene();
         this.actif = true;
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 4000);
         this.name = "Solaire";
         this.IsDefine = false;
     }
@@ -42,45 +42,45 @@ class SolaireScene {
         this.SystemeSolaire.add(this.Soleil);
         this.Soleil.scale.set(50, 50, 50);
 
-        this.GroupTerreSoleil = new THREE.Group();
-        this.SystemeSolaire.add(this.GroupTerreSoleil);
-
 
         //Initialisation du Group "Terre" comprennant la Terre et sa Lune
-        this.GroupTerre = new THREE.Group();
+        /*this.GroupTerre = new THREE.Group();
         this.GroupTerreSoleil.add(this.GroupTerre);
         this.GroupTerre.position.z = 0;
-        this.GroupTerre.position.x = 150;
+        this.GroupTerre.position.x = 150;*/
 
 
 
         //Création de la Terre
-        var material = new THREE.MeshStandardMaterial({
+        /*var material = new THREE.MeshStandardMaterial({
             map: TerreTexture,
             normalMap: TerreNormale
         });
         this.Terre = new THREE.Mesh(sphere, material);
         this.GroupTerre.add(this.Terre);
-        this.Terre.scale.set(10, 10, 10);
+        this.Terre.scale.set(10, 10, 10);*/
 
         //Création planètes
-        this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "test", 7, speedMars, speedMarsAns);
+        this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns);
+        this.Terre.group.position.z = 0;
+        this.Terre.group.position.x = 150;
+        this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
         this.Mars.group.position.z = 0;
         this.Mars.group.position.x = -150;
 
         //Ajout dans le système solaire
+        this.SystemeSolaire.add(this.Terre.baryGroup);
         this.SystemeSolaire.add(this.Mars.baryGroup);
-
-
+        
         //Ajout des nuages à la terre
         var nuageMat = new THREE.MeshStandardMaterial({ alphaMap: nuageTexture, transparent: true });
         this.nuage = new THREE.Mesh(sphere, nuageMat);
-        this.Terre.add(this.nuage);
+        this.Terre.mesh.add(this.nuage);
         this.nuage.scale.set(1.1, 1.1, 1.1);
 
 
         this.GroupLune = new THREE.Group();
-        this.GroupTerre.add(this.GroupLune);
+        this.Terre.group.add(this.GroupLune);
         //Création de la lune
         var LuneMaterial = new THREE.MeshStandardMaterial({ map: LuneTexture });
         this.Lune = new THREE.Mesh(sphere, LuneMaterial);
@@ -88,12 +88,6 @@ class SolaireScene {
         this.Lune.position.z = 50;
 
         this.Lune.scale.set(2.723, 2.723, 2.723);
-
-        // ajouter un objet vide pour porter la div
-        this.empty = new THREE.Object3D();
-        this.empty.position.x = .75;
-        this.empty.position.y = .75;
-        this.Terre.add(this.empty);
 
         //Méthode pour recupérer la position d'un objet
         this.getPositionOnScreen = function(camera, object3d) {
@@ -113,10 +107,6 @@ class SolaireScene {
         //pointLight.scale = new THREE.Vector3(10, 10, 10);
         this.SystemeSolaire.add(pointLight);
 
-        //Lumiere Bleu sur la Terre
-        var LightTerre = new THREE.AmbientLight(0x0000ff, 0.3);
-        this.Terre.add(LightTerre);
-
         //Lumiere Gris sur la lune
         var LightLune = new THREE.AmbientLight(0xdddddd, 0.3);
         this.Lune.add(LightLune);
@@ -124,10 +114,6 @@ class SolaireScene {
 
 
         
-        this.Terre.add(Penguin);
-        Penguin.position.y = 5;
-        Penguin.rotation.z = Math.PI;
-        Penguin.scale.set(0.01, 0.01, 0.01);
 
 
 
@@ -135,18 +121,15 @@ class SolaireScene {
         renderer.shadowMap.enabled = true;
         this.Lune.receiveShadow = true;
         this.Lune.castShadow = true;
-        this.Terre.receiveShadow = true;
-        this.Terre.castShadow = true;
         pointLight.castShadow = true;
         Vaiseau.castShadow = true;
         Vaiseau.receiveShadow = true;
 
         // positionnement de la caméra
-        this.camera.position.z = 150;
-        this.camera.position.y = 20;
-        this.camera.position.x = -70;
-
-
+        
+        this.camera.position.y = 40;
+        this.camera.position.z = -120;
+        this.camera.rotateY(Math.PI);
 
 
         //Permet le control à la souris
@@ -187,17 +170,11 @@ class SolaireScene {
         var delta = clock.getDelta();
         //Déroulement de l'animation
         this.GroupLune.rotateY(ToRad(delta * speedLune));
-        this.Terre.rotateY(ToRad(delta * speedTerre));
-        this.GroupTerreSoleil.rotateY(ToRad(delta * speedTerreAns));
         this.Soleil.rotateY(ToRad(delta * speedRotationSoleil));
         this.nuage.rotateZ(ToRad(delta * speedNuage));
 
-        //affichage terrePopup
-        var pos = this.getPositionOnScreen(this.camera, this.empty);
-        terrePopup.style.left = pos.x + "px";
-        terrePopup.style.top = pos.y + "px";
-
         //Annimate planètes
+        this.Terre.Animate(this.camera);
         this.Mars.Animate(this.camera);
 
         if(this.actif)
