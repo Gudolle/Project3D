@@ -51,10 +51,7 @@ class Planete {
         this.popupMesh.position.y = .75;
     }
 
-    Animate(camera) {
-        console.log("hi");
-        //Récupération du Delta
-        var delta = clock.getDelta();
+    Animate(camera, delta) {
 
         //Animation de la planète
         this.baryGroup.rotateY(ToRad(delta * this.speedAns))
