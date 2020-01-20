@@ -69,6 +69,9 @@ class SolaireScene {
         this.SystemeSolaire.add(this.Neptune.baryGroup);
         this.SystemeSolaire.add(this.Saturne.baryGroup);
         this.SystemeSolaire.add(this.Uranus.baryGroup);
+
+        console.log(this.Terre.light.toJSON());
+        console.log(this.Mars.light.toJSON());
         
         //Ajout des nuages à la terre
         var nuageMat = new THREE.MeshStandardMaterial({ alphaMap: nuageTexture, transparent: true });
