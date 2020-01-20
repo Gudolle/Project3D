@@ -51,6 +51,18 @@ class Planete {
         this.popupMesh.position.y = .75;
     }
 
+    SetGroupPosition(x, y, z) {
+        if (x != null) {
+            this.group.position.x = x;
+        }
+        if (y != null) {
+            this.group.position.y = y;
+        }
+        if (z != null) {
+            this.group.position.z = z;
+        }
+    }
+
     Animate(camera, delta) {
 
         //Animation de la planète
