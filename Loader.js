@@ -28,7 +28,11 @@ var allModel = [
     new Model("SoleilTexture", true, "jpg"),
     new Model("TerreTexture", true, "jpg"),
     new Model("waternormals", true, "jpg"),
-    new Model("grass1", true, "jpg")
+    new Model("grass1", true, "jpg"),
+    new Model("JupiterTexture", true, "jpg"),
+    new Model("VenusTexture", true, "jpg"),
+    new Model("MarsTexture", true, "jpg"),
+    new Model("MercureTexture", true, "jpg")
 ];
 
 
