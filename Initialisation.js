@@ -4,6 +4,10 @@ var LuneTexture;
 var SoleilTexture;
 var nuageTexture;
 var WaterTexture;
+var JupiterTexture;
+var VenusTexture;
+var MarsTexture;
+var MercureTexture;
 
 var Penguin;
 var Vaiseau;
@@ -60,6 +64,18 @@ function init(){
                     break;
                 case "grass1":
                     grass = item.Model;
+                    break;
+                case "JupiterTexture":
+                    JupiterTexture = item.Model;
+                    break;
+                case "VenusTexture":
+                    VenusTexture = item.Model;
+                    break;
+                case "MarsTexture":
+                    MarsTexture = item.Model;
+                    break;
+                case "MercureTexture":
+                    MercureTexture = item.Model;
                     break;
 
 

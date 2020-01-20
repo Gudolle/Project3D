@@ -4,7 +4,7 @@ class Planete {
         this.map = map;
         this.normalMap = normalMap;
         this.form = form;
-        this.light = new THREE.AmbientLight(lightColor, 0.3);
+        this.light = new THREE.AmbientLight(lightColor,0.03);
         this.popupDiv = document.getElementById(popupId);
         this.scaleMesh = scaleMesh;
         this.speed = speed;
@@ -39,6 +39,7 @@ class Planete {
         this.group.add(this.mesh);
         this.mesh.scale.set(this.scaleMesh, this.scaleMesh, this.scaleMesh);
         this.mesh.add(this.light);
+        //console.log(this.light);
         this.mesh.receiveShadow = true;
         this.mesh.castShadow = true;
 
@@ -78,5 +79,6 @@ class Planete {
         //Set popup's position
         this.popupDiv.style.left = vector.x + "px";
         this.popupDiv.style.top = vector.y + "px";
+        this.popupDiv.style.display = "none";
     }
 }

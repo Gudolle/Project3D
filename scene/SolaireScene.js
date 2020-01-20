@@ -42,21 +42,21 @@ class SolaireScene {
 
         //Création planètes
         this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns);
-        this.Terre.SetGroupPosition(150, null, 0);
-        this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
-        this.Mars.SetGroupPosition(-150, null, 0);
-        this.Mercure = new Planete(TerreTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns);
-        this.Mercure.SetGroupPosition(-150, null, 0);
-        this.Venus = new Planete(TerreTexture, null, sphere, 0xff0000, "venusPopup", 7, speedVenus, speedVenusAns);
-        this.Venus.SetGroupPosition(-150, null, 0);
-        this.Jupiter = new Planete(TerreTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns);
-        this.Jupiter.SetGroupPosition(-150, null, 0);
+        this.Terre.SetGroupPosition(DistanceTerre, null, 0);
+        this.Mars = new Planete(MarsTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
+        this.Mars.SetGroupPosition(DisMars, null, 0);
+        this.Mercure = new Planete(MercureTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns);
+        this.Mercure.SetGroupPosition(DisMercure, null, 0);
+        this.Venus = new Planete(VenusTexture, null, sphere, 0xff0000, "venusPopup", 7, speedVenus, speedVenusAns);
+        this.Venus.SetGroupPosition(DisVenus, null, 0);
+        this.Jupiter = new Planete(JupiterTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns);
+        this.Jupiter.SetGroupPosition(DisJupityer, null, 0);
         this.Saturne = new Planete(TerreTexture, null, sphere, 0xff0000, "saturnePopup", 7, speedSaturne, speedSaturneAns);
-        this.Saturne.SetGroupPosition(-150, null, 0);
+        this.Saturne.SetGroupPosition(DisSaturne, null, 0);
         this.Uranus = new Planete(TerreTexture, null, sphere, 0xff0000, "uranusPopup", 7, speedUranus, speedUranusAns);
-        this.Uranus.SetGroupPosition(-150, null, 0);
+        this.Uranus.SetGroupPosition(DisUranus, null, 0);
         this.Neptune = new Planete(TerreTexture, null, sphere, 0xff0000, "neptunePopup", 7, speedNeptune, speedNeptuneAns);
-        this.Neptune.SetGroupPosition(-150, null, 0);
+        this.Neptune.SetGroupPosition(DisNeptune, null, 0);
 
 
 
@@ -99,8 +99,9 @@ class SolaireScene {
             return vector;
         }
 
+        console.log(DisUranus);
         //Définition de la lumière du soleil
-        var pointLight = new THREE.PointLight(0xaaaaff, 10, 2000);
+        var pointLight = new THREE.PointLight(0xaaaaff, 10, 15000);
         pointLight.position.set(0, 0, 0);
         //pointLight.scale = new THREE.Vector3(10, 10, 10);
         this.SystemeSolaire.add(pointLight);
@@ -138,7 +139,7 @@ class SolaireScene {
                 manetteControls = null;
                 controls = new THREE.OrbitControls(camera, renderer.domElement);
                 controls.minDistance = 2;
-                controls.maxDistance = 500;
+                controls.maxDistance = 800;
             } else {
                 controls = null;
                 manetteControls = new THREE.GamepadControls(camera);
@@ -185,29 +186,45 @@ class SolaireScene {
     }
 }
 
-var speedMars = CalculTempo(.5);//TODO a checker
-var speedMarsAns = CalculTempo(15);// TODO ^
-var speedMercure = CalculTempo(.5);//TODO a checker
-var speedMercureAns = CalculTempo(15);// TODO ^
-var speedVenus = CalculTempo(.5);//TODO a checker
-var speedVenusAns = CalculTempo(15);// TODO ^
-var speedJupiter = CalculTempo(.5);//TODO a checker
-var speedJupiterAns = CalculTempo(15);// TODO ^
-var speedSaturne = CalculTempo(.5);//TODO a checker
-var speedSaturneAns = CalculTempo(15);// TODO ^
-var speedUranus = CalculTempo(.5);//TODO a checker
-var speedUranusAns = CalculTempo(15);// TODO ^
-var speedNeptune = CalculTempo(.5);//TODO a checker
-var speedNeptuneAns = CalculTempo(15);// TODO ^
+var speedMars = CalculTempo(1);//TODO a checker
+var speedMarsAns = CalculTempo(687);// TODO ^
+var speedMercure = CalculTempo(59);//TODO a checker
+var speedMercureAns = CalculTempo(88);// TODO ^
+var speedVenus = CalculTempo(117);//TODO a checker
+var speedVenusAns = CalculTempo(225);// TODO ^
+var speedJupiter = CalculTempo(.4);//TODO a checker
+var speedJupiterAns = CalculTempo(4380);// TODO ^
+var speedSaturne = CalculTempo(.4);//TODO a checker
+var speedSaturneAns = CalculTempo(10585);// TODO ^
+var speedUranus = CalculTempo(.8);//TODO a checker
+var speedUranusAns = CalculTempo(30660);// TODO ^
+var speedNeptune = CalculTempo(.7);//TODO a checker
+var speedNeptuneAns = CalculTempo(60225);// TODO ^
 var speedLune = CalculTempo(28); //La lune met 28 jours pour tourner autour de la terre
 var speedTerre = CalculTempo(1); // La terre met 1 jours pour tourner autour d'elle même
 var speedTerreAns = CalculTempo(365); //La terre met 365 jour pour tourner autour du soleil
 var speedRotationSoleil = CalculTempo(27); //Soleil tourne en moyenne à 27j pour tourner autour de lui même
 var speedNuage = CalculTempo(2); // La vitesse des nuages
 
+var DistanceTerre = 500;
+var DisMercure = CalculDistance(.4);
+var DisVenus = CalculDistance(.7);
+var DisMars = CalculDistance(1.5);
+var DisJupityer = CalculDistance(5.2);
+var DisSaturne = CalculDistance(9.5);
+var DisUranus = CalculDistance(19.6);
+var DisNeptune = CalculDistance(30);
+
+
+
+function CalculDistance(UE){
+    return UE * DistanceTerre;
+}
+
+
 //Permet de calculer la vitesse en fonction de la durée pour faire un tour complet en Jour
 function CalculTempo(y) {
-    return (360 / (y * 5));
+    return (360 / (y * 1));
 }
 //Simplification pour convertir en Radiant car flemme
 function ToRad(x) {
