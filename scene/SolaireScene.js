@@ -44,15 +44,33 @@ class SolaireScene {
 
         //Création planètes
         this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns);
-        this.Terre.group.position.z = 0;
-        this.Terre.group.position.x = 150;
+        this.Terre.SetGroupPosition(150, null, 0);
         this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
-        this.Mars.group.position.z = 0;
-        this.Mars.group.position.x = -150;
+        this.Mars.SetGroupPosition(-150, null, 0);
+        this.mercure = new Planete(TerreTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns);
+        this.mercure.SetGroupPosition(-150, null, 0);
+        this.Venus = new Planete(TerreTexture, null, sphere, 0xff0000, "venusPopup", 7, speedVenus, speedVenusAns);
+        this.Venus.SetGroupPosition(-150, null, 0);
+        this.Jupiter = new Planete(TerreTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns);
+        this.Jupiter.SetGroupPosition(-150, null, 0);
+        this.Saturne = new Planete(TerreTexture, null, sphere, 0xff0000, "saturnePopup", 7, speedSaturne, speedSaturneAns);
+        this.Saturne.SetGroupPosition(-150, null, 0);
+        this.Uranus = new Planete(TerreTexture, null, sphere, 0xff0000, "uranusPopup", 7, speedUranus, speedUranusAns);
+        this.Uranus.SetGroupPosition(-150, null, 0);
+        this.Neptune = new Planete(TerreTexture, null, sphere, 0xff0000, "neptunePopup", 7, speedNeptune, speedNeptuneAns);
+        this.Neptune.SetGroupPosition(-150, null, 0);
+
+
 
         //Ajout dans le système solaire
         this.SystemeSolaire.add(this.Terre.baryGroup);
         this.SystemeSolaire.add(this.Mars.baryGroup);
+        this.SystemeSolaire.add(this.Mercure.baryGroup);
+        this.SystemeSolaire.add(this.Venus.baryGroup);
+        this.SystemeSolaire.add(this.Jupiter.baryGroup);
+        this.SystemeSolaire.add(this.Neptune.baryGroup);
+        this.SystemeSolaire.add(this.Saturne.baryGroup);
+        this.SystemeSolaire.add(this.Uranus.baryGroup);
         
         //Ajout des nuages à la terre
         var nuageMat = new THREE.MeshStandardMaterial({ alphaMap: nuageTexture, transparent: true });
@@ -149,6 +167,12 @@ class SolaireScene {
         //Annimate planètes
         this.Terre.Animate(this.camera);
         this.Mars.Animate(this.camera);
+        this.Mercure.Animate(this.camera);
+        this.Venus.Animate(this.camera);
+        this.Jupiter.Animate(this.camera);
+        this.Saturne.Animate(this.camera);
+        this.Uranus.Animate(this.camera);
+        this.Neptune.Animate(this.camera);
 
         if(this.actif)
 

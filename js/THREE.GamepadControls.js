@@ -94,12 +94,35 @@ THREE.GamepadControls = function ( object ) {
 				this.filter( g.buttons[ 7 ].value ) - this.filter( g.buttons[ 6 ].value ), 
 				this.filter( g.axes[ 3 ] ) 
 			);
-			this.dir.multiplyScalar( .1 );
+			//this.dir.multiplyScalar( 1 );
 			this.dir.applyMatrix4( this.rotMatrix );
 			this.object.position.add( this.dir );
+
+			if( g.buttons[0].pressed == true) {
+				//this.accelerate();
+				console.log("hi");
+				this.dir.multiplyScalar(.1);
+				this.dir.applyMatrix4( this.rotMatrix );
+				this.object.position.add( this.dir );
+			  } else if(g.buttons[1].value > 0 ) {
+				//this.decelerate();
+				console.log("hi2");
+			  } else if(g.buttons[2].value > 0 || g.buttons[2].pressed == true) {
+				this.accelerate();
+			  } else if(g.buttons[3].value > 0 || g.buttons[3].pressed == true) {
+				this.decelerate();
+			  }
 			
 		}
 
+	}
+
+	this.accelerate = function() {
+		this.dir.multiplyScalar( 1.5 );
+	}
+
+	this.decelerate = function() {
+		this.dir.multiplyScalar( .75 );
 	}
 
 	this.init();
