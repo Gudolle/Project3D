@@ -9,7 +9,6 @@ class SolaireScene {
     DefineScene() {
 
         //Définition des Textures
-
         this.scene.add(Vaiseau);
         Vaiseau.position.x = 78;
         Vaiseau.position.y = 78;
@@ -27,7 +26,6 @@ class SolaireScene {
                 '6.jpg'
             ]);
 
-
         //Création du Systeme Solaire
         this.SystemeSolaire = new THREE.Group();
         this.scene.add(this.SystemeSolaire);
@@ -44,6 +42,7 @@ class SolaireScene {
 
         //Création planètes
         this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns);
+<<<<<<< HEAD
         this.Terre.SetGroupPosition(150, null, 0);
         this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
         this.Mars.SetGroupPosition(-150, null, 0);
@@ -71,6 +70,18 @@ class SolaireScene {
         this.SystemeSolaire.add(this.Neptune.baryGroup);
         this.SystemeSolaire.add(this.Saturne.baryGroup);
         this.SystemeSolaire.add(this.Uranus.baryGroup);
+=======
+        this.Terre.group.position.z = 0;
+        this.Terre.group.position.x = 150;
+        /*
+        this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
+        this.Mars.group.position.z = 0;
+        this.Mars.group.position.x = -150;*/
+
+        //Ajout dans le système solaire
+        this.SystemeSolaire.add(this.Terre.baryGroup);
+        //this.SystemeSolaire.add(this.Mars.baryGroup);
+>>>>>>> 0de904013c1f75ae30513711094a8b19e9b408e4
         
         //Ajout des nuages à la terre
         var nuageMat = new THREE.MeshStandardMaterial({ alphaMap: nuageTexture, transparent: true });
@@ -165,17 +176,16 @@ class SolaireScene {
         this.nuage.rotateZ(ToRad(delta * speedNuage));
 
         //Annimate planètes
-        this.Terre.Animate(this.camera);
-        this.Mars.Animate(this.camera);
-        this.Mercure.Animate(this.camera);
-        this.Venus.Animate(this.camera);
-        this.Jupiter.Animate(this.camera);
-        this.Saturne.Animate(this.camera);
-        this.Uranus.Animate(this.camera);
-        this.Neptune.Animate(this.camera);
+        this.Terre.Animate(this.camera, delta);
+        this.Mars.Animate(this.camera, delta);
+        this.Mercure.Animate(this.camera, delta);
+        this.Venus.Animate(this.camera, delta);
+        this.Jupiter.Animate(this.camera, delta);
+        this.Saturne.Animate(this.camera, delta);
+        this.Uranus.Animate(this.camera, delta);
+        this.Neptune.Animate(this.camera, delta);
 
         if(this.actif)
-
             requestAnimationFrame(this.animate.bind(this));
 
         renderer.render(this.scene, this.camera);
@@ -186,7 +196,6 @@ class SolaireScene {
     active(){
         this.actif = true;
     }
-    
 }
 
 var speedMars = CalculTempo(.5);//TODO a checker
