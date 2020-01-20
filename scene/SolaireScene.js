@@ -45,8 +45,8 @@ class SolaireScene {
         this.Terre.SetGroupPosition(150, null, 0);
         this.Mars = new Planete(TerreTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
         this.Mars.SetGroupPosition(-150, null, 0);
-        this.mercure = new Planete(TerreTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns);
-        this.mercure.SetGroupPosition(-150, null, 0);
+        this.Mercure = new Planete(TerreTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns);
+        this.Mercure.SetGroupPosition(-150, null, 0);
         this.Venus = new Planete(TerreTexture, null, sphere, 0xff0000, "venusPopup", 7, speedVenus, speedVenusAns);
         this.Venus.SetGroupPosition(-150, null, 0);
         this.Jupiter = new Planete(TerreTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns);
@@ -187,6 +187,18 @@ class SolaireScene {
 
 var speedMars = CalculTempo(.5);//TODO a checker
 var speedMarsAns = CalculTempo(15);// TODO ^
+var speedMercure = CalculTempo(.5);//TODO a checker
+var speedMercureAns = CalculTempo(15);// TODO ^
+var speedVenus = CalculTempo(.5);//TODO a checker
+var speedVenusAns = CalculTempo(15);// TODO ^
+var speedJupiter = CalculTempo(.5);//TODO a checker
+var speedJupiterAns = CalculTempo(15);// TODO ^
+var speedSaturne = CalculTempo(.5);//TODO a checker
+var speedSaturneAns = CalculTempo(15);// TODO ^
+var speedUranus = CalculTempo(.5);//TODO a checker
+var speedUranusAns = CalculTempo(15);// TODO ^
+var speedNeptune = CalculTempo(.5);//TODO a checker
+var speedNeptuneAns = CalculTempo(15);// TODO ^
 var speedLune = CalculTempo(28); //La lune met 28 jours pour tourner autour de la terre
 var speedTerre = CalculTempo(1); // La terre met 1 jours pour tourner autour d'elle même
 var speedTerreAns = CalculTempo(365); //La terre met 365 jour pour tourner autour du soleil
