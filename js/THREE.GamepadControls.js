@@ -117,19 +117,24 @@ THREE.GamepadControls = function ( object ) {
 
 	this.clickButton = function() {
 		var raycaster = new THREE.Raycaster();
-		var cible = new THREE.Vector2();
-		cible.x = window.innerWidth/2;
-		cible.y = window.innerHeight/2;
+		var cible = new THREE.Vector3();
+		cible.project(MyGame.scene.camera);
+
+		cible.x = Math.round((cible.x + 1) / 2 * window.innerWidth);
+		cible.y = Math.round(-(cible.y - 1) / 2 * window.innerHeight);
+		cible.z = 0;
+
 
 		// update the picking ray with the camera and mouse position
-		raycaster.setFromCamera( cible, this.object );
+		raycaster.setFromCamera( cible, MyGame.scene.camera );
 		console.log(MyGame);
 		// calculate objects intersecting the picking ray
-		var intersects = raycaster.intersectObjects( MyGame.scene.SystemeSolaire.children );
+		var intersects = raycaster.intersectObjects( MyGame.scene.scene.children );
 
+		console.log(intersects);
 		for ( var i = 0; i < intersects.length; i++ ) {
 
-			console.log(intersects[0]);
+			console.log("hi " + intersects[0]);
 			intersects[ i ].object.material.color.set( 0xff0000 );
 
 		}
