@@ -116,28 +116,36 @@ THREE.GamepadControls = function ( object ) {
 	}
 
 	this.clickButton = function() {
-		var raycaster = new THREE.Raycaster();
+		/*var raycaster = new THREE.Raycaster();
 		var cible = new THREE.Vector3();
 		cible.project(MyGame.scene.camera);
 
 		cible.x = Math.round((cible.x + 1) / 2 * window.innerWidth);
 		cible.y = Math.round(-(cible.y - 1) / 2 * window.innerHeight);
-		cible.z = 0;
+		cible.z = 0;*/
+		var audioLoader = new THREE.AudioLoader();
+		audioLoader.load( 'music/Star_trek_original_cut', function( buffer ) {
+			sound.setBuffer( buffer );
+			sound.setLoop( true );
+			sound.setVolume( 0.5 );
+			sound.play();
+		});
+		
 
 
 		// update the picking ray with the camera and mouse position
-		raycaster.setFromCamera( cible, MyGame.scene.camera );
-		console.log(MyGame);
+//raycaster.setFromCamera( cible, MyGame.scene.camera );
+		//console.log(MyGame);
 		// calculate objects intersecting the picking ray
-		var intersects = raycaster.intersectObjects( MyGame.scene.scene.children );
+		//var intersects = raycaster.intersectObjects( MyGame.scene.scene.children );
 
-		console.log(intersects);
+		/*console.log(intersects);
 		for ( var i = 0; i < intersects.length; i++ ) {
 
 			console.log("hi " + intersects[0]);
 			intersects[ i ].object.material.color.set( 0xff0000 );
 
-		}
+		}*/
 	}
 
 	this.accelerate = function() {
