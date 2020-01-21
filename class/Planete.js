@@ -1,14 +1,16 @@
 class Planete {
-    constructor(map, normalMap, form, lightColor, popupId, scaleMesh, speed, speedAns) {
+    constructor(map, normalMap, form, lightColor, popupId, scaleMesh, speed, speedAns, popupEngine) {
         //set all the variables
         this.map = map;
         this.normalMap = normalMap;
         this.form = form;
         this.light = new THREE.AmbientLight(lightColor,0.03);
+        this.popupId = popupId;
         this.popupDiv = document.getElementById(popupId);
         this.scaleMesh = scaleMesh;
         this.speed = speed;
         this.speedAns = speedAns;
+        this.popupEngine = popupEngine;
 
         //execute setup method to configure the planet
         this.Setup();
@@ -45,11 +47,13 @@ class Planete {
 
         //create an empty mesh for the info popup
         this.popupMesh = new THREE.Object3D();
-        this.mesh.add(this.popupMesh);
+        //this.mesh.add(this.popupMesh);
 
         //place the pop up on the side
-        this.popupMesh.position.x = .75;
-        this.popupMesh.position.y = .75;
+        this.popupMesh.position.x = 1;
+        this.popupMesh.position.y = 1.5;
+        this.mesh.add(this.popupMesh);
+        this.popupEngine.addPopup(this.popupId, this.popupMesh, this.mesh);
     }
 
     SetGroupPosition(x, y, z) {

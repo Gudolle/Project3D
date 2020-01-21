@@ -26,39 +26,44 @@
       margin: 20px;
     }
 
-    #terrePopup {
+    .popup {
       position: absolute;
+
       z-index: 10;
-      max-width: 20em;
+      max-width: 200em;
+      color: black;
       background-color: white;
       padding: 10px;
+      font-family: "Sans-Serif";
+      border-radius: 5px;
+      border: 1px solid red;
     }
   </style>
 </head>
 
 <body>
-  <div id="terrePopup">
+  <div id="terrePopup" class="popup">
     Terre
   </div>
-  <div id="marsPopup">
+  <div id="marsPopup" class="popup">
     Mars
   </div>
-  <div id="mercurePopup">
+  <div id="mercurePopup" class="popup">
     Mercure
   </div>
-  <div id="venusPopup">
+  <div id="venusPopup" class="popup">
     Venus
   </div>
-  <div id="jupiterPopup">
+  <div id="jupiterPopup" class="popup">
     Jupiter
   </div>
-  <div id="saturnePopup">
+  <div id="saturnePopup" class="popup">
     Saturne
   </div>
-  <div id="uranusPopup">
+  <div id="uranusPopup" class="popup">
     Uranus
   </div>
-  <div id="neptunePopup">
+  <div id="neptunePopup" class="popup">
     Neptune
   </div>
   <!--<div id="soleilPopup">
@@ -93,6 +98,7 @@
   <script src="class/GameInfo.js"></script>
   <script src="class/Pingouin.js"></script>
   <script src="class/Planete.js"></script>
+  <script src="class/PopupEngine.js"></script>
 
   <!--Effect-->
   <script src="effect/Water.js"></script>

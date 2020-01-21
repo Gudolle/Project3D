@@ -41,21 +41,22 @@ class SolaireScene {
         this.Soleil.scale.set(50, 50, 50);
 
         //Création planètes
-        this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns);
+        this.popupEngine = new PopupEngine(this.camera);
+        this.Terre = new Planete(TerreTexture, TerreNormale, sphere, 0x0000ff, "terrePopup", 10, speedTerre, speedTerreAns, this.popupEngine);
         this.Terre.SetGroupPosition(DistanceTerre, null, 0);
-        this.Mars = new Planete(MarsTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns);
+        this.Mars = new Planete(MarsTexture, null, sphere, 0xff0000, "marsPopup", 7, speedMars, speedMarsAns, this.popupEngine);
         this.Mars.SetGroupPosition(DisMars, null, 0);
-        this.Mercure = new Planete(MercureTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns);
+        this.Mercure = new Planete(MercureTexture, null, sphere, 0xff0000, "mercurePopup", 7, speedMercure, speedMercureAns, this.popupEngine);
         this.Mercure.SetGroupPosition(DisMercure, null, 0);
-        this.Venus = new Planete(VenusTexture, null, sphere, 0xff0000, "venusPopup", 7, speedVenus, speedVenusAns);
+        this.Venus = new Planete(VenusTexture, null, sphere, 0xff0000, "venusPopup", 7, speedVenus, speedVenusAns, this.popupEngine);
         this.Venus.SetGroupPosition(DisVenus, null, 0);
-        this.Jupiter = new Planete(JupiterTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns);
+        this.Jupiter = new Planete(JupiterTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns, this.popupEngine);
         this.Jupiter.SetGroupPosition(DisJupityer, null, 0);
-        this.Saturne = new Planete(TerreTexture, null, sphere, 0xff0000, "saturnePopup", 7, speedSaturne, speedSaturneAns);
+        this.Saturne = new Planete(TerreTexture, null, sphere, 0xff0000, "saturnePopup", 7, speedSaturne, speedSaturneAns, this.popupEngine);
         this.Saturne.SetGroupPosition(DisSaturne, null, 0);
-        this.Uranus = new Planete(TerreTexture, null, sphere, 0xff0000, "uranusPopup", 7, speedUranus, speedUranusAns);
+        this.Uranus = new Planete(TerreTexture, null, sphere, 0xff0000, "uranusPopup", 7, speedUranus, speedUranusAns, this.popupEngine);
         this.Uranus.SetGroupPosition(DisUranus, null, 0);
-        this.Neptune = new Planete(TerreTexture, null, sphere, 0xff0000, "neptunePopup", 7, speedNeptune, speedNeptuneAns);
+        this.Neptune = new Planete(TerreTexture, null, sphere, 0xff0000, "neptunePopup", 7, speedNeptune, speedNeptuneAns, this.popupEngine);
         this.Neptune.SetGroupPosition(DisNeptune, null, 0);
 
 
@@ -166,15 +167,8 @@ class SolaireScene {
         this.Soleil.rotateY(ToRad(delta * speedRotationSoleil));
         this.nuage.rotateZ(ToRad(delta * speedNuage));
 
-        //Annimate planètes
-        this.Terre.Animate(this.camera, delta);
-        this.Mars.Animate(this.camera, delta);
-        this.Mercure.Animate(this.camera, delta);
-        this.Venus.Animate(this.camera, delta);
-        this.Jupiter.Animate(this.camera, delta);
-        this.Saturne.Animate(this.camera, delta);
-        this.Uranus.Animate(this.camera, delta);
-        this.Neptune.Animate(this.camera, delta);
+        //Animate planètes
+        this.popupEngine.animate();
 
         if(this.actif)
             requestAnimationFrame(this.animate.bind(this));
