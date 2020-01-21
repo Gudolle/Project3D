@@ -31,7 +31,10 @@ var allModel = [
     new Model("JupiterTexture", true, "jpg"),
     new Model("VenusTexture", true, "jpg"),
     new Model("MarsTexture", true, "jpg"),
-    new Model("MercureTexture", true, "jpg")
+    new Model("MercureTexture", true, "jpg"),
+    new Model("NeptuneTexture", true, "jpg"),
+    new Model("SaturneTexture", true, "jpg"),
+    new Model("UranusTexture", true, "jpg")
 ];
 
 

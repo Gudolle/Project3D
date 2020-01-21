@@ -52,11 +52,11 @@ class SolaireScene {
         this.Venus.SetGroupPosition(DisVenus, null, 0);
         this.Jupiter = new Planete(JupiterTexture, null, sphere, 0xff0000, "jupiterPopup", 7, speedJupiter, speedJupiterAns, this.popupEngine);
         this.Jupiter.SetGroupPosition(DisJupityer, null, 0);
-        this.Saturne = new Planete(TerreTexture, null, sphere, 0xff0000, "saturnePopup", 7, speedSaturne, speedSaturneAns, this.popupEngine);
+        this.Saturne = new Planete(SaturneTexture, null, sphere, 0xff0000, "saturnePopup", 7, speedSaturne, speedSaturneAns, this.popupEngine);
         this.Saturne.SetGroupPosition(DisSaturne, null, 0);
-        this.Uranus = new Planete(TerreTexture, null, sphere, 0xff0000, "uranusPopup", 7, speedUranus, speedUranusAns, this.popupEngine);
+        this.Uranus = new Planete(UranusTexture, null, sphere, 0xff0000, "uranusPopup", 7, speedUranus, speedUranusAns, this.popupEngine);
         this.Uranus.SetGroupPosition(DisUranus, null, 0);
-        this.Neptune = new Planete(TerreTexture, null, sphere, 0xff0000, "neptunePopup", 7, speedNeptune, speedNeptuneAns, this.popupEngine);
+        this.Neptune = new Planete(NeptuneTexture, null, sphere, 0xff0000, "neptunePopup", 7, speedNeptune, speedNeptuneAns, this.popupEngine);
         this.Neptune.SetGroupPosition(DisNeptune, null, 0);
 
 
@@ -71,9 +71,10 @@ class SolaireScene {
         this.SystemeSolaire.add(this.Saturne.baryGroup);
         this.SystemeSolaire.add(this.Uranus.baryGroup);
 
+        /*
         console.log(this.Terre.light.toJSON());
         console.log(this.Mars.light.toJSON());
-        
+        */
         //Ajout des nuages à la terre
         var nuageMat = new THREE.MeshStandardMaterial({ alphaMap: nuageTexture, transparent: true });
         this.nuage = new THREE.Mesh(sphere, nuageMat);
@@ -133,6 +134,12 @@ class SolaireScene {
         controls.minDistance = 2;
         controls.maxDistance = 500;
 
+        var cameraVaiseau = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.5, 4000)
+        Vaiseau.add(cameraVaiseau);
+        cameraVaiseau.position.set(0,5,0);
+
+
+
         //Permet de swap entre souris et manette
         var manetteControls;
         var gamepadSupportAvailable = navigator.getGamepads ||
@@ -144,9 +151,11 @@ class SolaireScene {
                 controls = new THREE.OrbitControls(camera, renderer.domElement);
                 controls.minDistance = 2;
                 controls.maxDistance = 800;
+                //Vaiseau.remove(camera);
             } else {
                 controls = null;
-                manetteControls = new THREE.GamepadControls(camera);
+                Vaiseau.add(camera);
+                manetteControls = new THREE.GamepadControls(Vaiseau);
             }
         }
         if (!gamepadSupportAvailable) {

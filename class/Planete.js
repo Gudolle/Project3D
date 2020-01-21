@@ -50,7 +50,7 @@ class Planete {
         //this.mesh.add(this.popupMesh);
 
         //place the pop up on the side
-        this.popupMesh.position.x = 1;
+        //this.popupMesh.position.x = 1;
         this.popupMesh.position.y = 1.5;
         this.mesh.add(this.popupMesh);
         this.popupEngine.addPopup(this.popupId, this.popupMesh, this.mesh);
