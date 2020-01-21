@@ -12,6 +12,7 @@ function Game() {
     document.getElementById("Barre").style.display = "none";
 
     MyGame.ChangeScene(IdentifiantScene.SOLAIRE);
+    
 
 
     function updateViewportSize() {

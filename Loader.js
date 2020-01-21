@@ -1,12 +1,11 @@
 class Model {
-    constructor(name, texture, format){
+    constructor(name, texture, format) {
         this.name = name;
         this.texture = texture;
         this.format = format;
     }
 
-    AddModel(Model)
-    {
+    AddModel(Model) {
         this.Model = Model;
     }
 }
@@ -41,36 +40,39 @@ var allPromises = [];
 var loader = new THREE.TextureLoader();
 var loaderGlb = new THREE.GLTFLoader();
 
-loader.setPath( 'Texture/');
-loaderGlb.setPath( 'model/');
+loader.setPath('Texture/');
+loaderGlb.setPath('model/');
 
 var myBar = document.getElementById("myBar");
 var width = 0;
-var padding = 100/allModel.length;
+var padding = 100 / allModel.length;
 
-var onsuccess = function(){
-    width += padding;
+function success(xhr) {
+    width += (xhr.loaded / xhr.total * padding);
     myBar.style.width = width + "%";
 }
 
-function ChargementModel(){
-    allModel.forEach(function(item){
-        allPromises.push(new Promise(function(resolve, error){
-            if(!item.texture){
+function ChargementModel() {
+    allModel.forEach(function (item) {
+        allPromises.push(new Promise(function (resolve, error) {
+            if (!item.texture) {
                 loaderGlb.load(item.name + '.glb', function (gltf) {
                     item.AddModel(gltf.scene);
                     resolve(item);
-                  },
-                  onsuccess,
-                  function (error) {
-                    console.error(error);
-                });
+                },
+                    function (xhr) {
+
+                        success(xhr)
+                    },
+                    function (error) {
+                        console.error(error);
+                    });
             }
-            else if(item.texture){
-                item.AddModel(loader.load( item.name + '.' + item.format, undefined, onsuccess , function(err) { console.log("Erreur pour : " + item.name)}));
+            else if (item.texture) {
+                item.AddModel(loader.load(item.name + '.' + item.format, undefined, function (xhr) { success(xhr) }, function (err) { console.log("Erreur pour : " + item.name) }));
                 resolve(item);
             }
         }));
-        
+
     });
 }

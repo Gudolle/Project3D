@@ -83,6 +83,5 @@ class Planete {
         //Set popup's position
         this.popupDiv.style.left = vector.x + "px";
         this.popupDiv.style.top = vector.y + "px";
-        this.popupDiv.style.display = "none";
     }
 }
