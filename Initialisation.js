@@ -8,6 +8,9 @@ var JupiterTexture;
 var VenusTexture;
 var MarsTexture;
 var MercureTexture;
+var NeptuneTexture;
+var UranusTexture;
+var SaturneTexture;
 
 var Penguin;
 var Vaiseau;
@@ -76,6 +79,15 @@ function init(){
                     break;
                 case "MercureTexture":
                     MercureTexture = item.Model;
+                    break;
+                case "NeptuneTexture":
+                    NeptuneTexture = item.Model;
+                    break;
+                case "UranusTexture":
+                    UranusTexture = item.Model;
+                    break;
+                case "SaturneTexture":
+                    SaturneTexture = item.Model;
                     break;
 
 

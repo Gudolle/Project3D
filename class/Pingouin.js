@@ -27,7 +27,7 @@ class Pingouin{
         }
     }
     getCamera(){
-        return new THREE.Vector3()
+        return new THREE.Vector3() //TODO
     }
 }
 
