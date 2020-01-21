@@ -101,9 +101,7 @@ THREE.GamepadControls = function ( object ) {
 			if( g.buttons[0].pressed == true) {
 				//this.accelerate();
 				console.log("hi");
-				this.dir.multiplyScalar(.1);
-				this.dir.applyMatrix4( this.rotMatrix );
-				this.object.position.add( this.dir );
+				this.clickButton();
 			  } else if(g.buttons[1].value > 0 ) {
 				//this.decelerate();
 				console.log("hi2");
@@ -115,6 +113,26 @@ THREE.GamepadControls = function ( object ) {
 			
 		}
 
+	}
+
+	this.clickButton = function() {
+		var raycaster = new THREE.Raycaster();
+		var cible = new THREE.Vector2();
+		cible.x = window.innerWidth/2;
+		cible.y = window.innerHeight/2;
+
+		// update the picking ray with the camera and mouse position
+		raycaster.setFromCamera( cible, this.object );
+		console.log(MyGame);
+		// calculate objects intersecting the picking ray
+		var intersects = raycaster.intersectObjects( MyGame.scene.SystemeSolaire.children );
+
+		for ( var i = 0; i < intersects.length; i++ ) {
+
+			console.log(intersects[0]);
+			intersects[ i ].object.material.color.set( 0xff0000 );
+
+		}
 	}
 
 	this.accelerate = function() {
